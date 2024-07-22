@@ -75,16 +75,16 @@ namespace api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> Delte([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var comment = await _commentRepo.DeleteAsync(id);
+            var commentModel = await _commentRepo.DeleteAsync(id);
 
-            if (comment == null)
+            if (commentModel == null)
             {
-                return NotFound();
+                return NotFound("Comment does not exist");
             }
 
-            return NoContent();
+            return Ok(commentModel);
         }
     }
 }
